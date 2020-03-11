@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://code.alibabatech.com/schema/dubbo 
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<context:component-scan base-package="com.taotao.content.service"></context:component-scan>
+	 
+	<!-- 声明需要暴露的服务接口 -->
+	 
+	<dubbo:application name="taotao-content"/>
+	<dubbo:registry address="192.168.43.48:2181" protocol="zookeeper"></dubbo:registry>
+	<dubbo:protocol name="dubbo" port="20882"></dubbo:protocol>
+	<dubbo:service interface="com.taotao.content.service.ContentCategoryService" ref="contentCategoryServiceImpl" timeout="100000000"></dubbo:service> 
+	<dubbo:service interface="com.taotao.content.service.ContentService" ref="contentServiceImpl" timeout="100000000"></dubbo:service> 
+	
+</beans>
